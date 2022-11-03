@@ -1,0 +1,36 @@
+{
+    "name": "Assignment 2, Section 3: Scheme Interpreter",
+    "endpoint": "as02sec03",
+    "src": [
+        "scheme_eval_apply.py",
+        "scheme_forms.py",
+        "scheme_classes.py"
+    ],
+    "tests": {
+        "tests/*.py": "ok_test",
+        "tests.scm": "scheme_test"
+    },
+    "default_tests": [
+        "eval_apply",
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "tests.scm"
+    ],
+    "protocols": [
+        "file_contents",
+        "grading",
+        "unlock",
+        "analytics",
+        "backup"
+    ]
+}

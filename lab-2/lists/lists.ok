@@ -1,0 +1,21 @@
+{
+    "name": "Assignment 2, Section 2: Scheme Lists",
+    "endpoint": "as02sec02",
+    "src": [
+        "list.scm"
+    ],
+    "tests": {
+        "tests/*.py": "ok_test"
+    },
+    "default_tests": [
+        "L1",
+        "L2"
+    ],
+    "protocols": [
+        "file_contents",
+        "grading",
+        "unlock",
+        "analytics",
+        "backup"
+    ]
+}

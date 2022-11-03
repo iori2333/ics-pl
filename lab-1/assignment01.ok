@@ -1,0 +1,24 @@
+{
+    "name": "Scheme",
+    "endpoint": "assignment01",
+    "src": [
+        "assignment01.scm"
+    ],
+    "tests": {
+        "tests/*.py": "ok_test"
+    },
+    "default_tests": [
+        "combinations",
+        "over-or-under",
+        "make-adder",
+        "composed",
+        "gcd",
+        "pow"
+    ],
+    "protocols": [
+        "file_contents",
+        "analytics",
+        "grading",
+        "backup"
+    ]
+}
