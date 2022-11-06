@@ -35,7 +35,10 @@ def scheme_eval(expr, env, _=None):  # Optional third argument is ignored
         return scheme_forms.SPECIAL_FORMS[first](rest, env)
     else:
         # BEGIN PROBLEM 3
-        "*** YOUR CODE HERE ***"
+        procedure = scheme_eval(first, env)
+        validate_procedure(procedure)
+        operands = rest.map(lambda op: scheme_eval(op, env))
+        return scheme_apply(procedure, operands, env)
         # END PROBLEM 3
 
 
@@ -45,11 +48,24 @@ def scheme_apply(procedure, args, env):
     validate_procedure(procedure)
     if isinstance(procedure, BuiltinProcedure):
         # BEGIN PROBLEM 2
-        "*** YOUR CODE HERE ***"
+        it = procedure
+        py_args = []
+        curr = args
+        while curr != nil:
+            py_args.append(curr.first)
+            curr = curr.rest
+        if it.expect_env:
+            py_args.append(env)
+
+        try:
+            return it.py_func(*py_args)
+        except TypeError as e:
+            raise SchemeError(e)
         # END PROBLEM 2
     elif isinstance(procedure, LambdaProcedure):
         # BEGIN PROBLEM 9
-        "*** YOUR CODE HERE ***"
+        child_frame = procedure.env.make_child_frame(procedure.formals, args)
+        return eval_all(procedure.body, child_frame)
         # END PROBLEM 9
     elif isinstance(procedure, MuProcedure):
         child_frame = env.make_child_frame(procedure.formals, args)
@@ -74,13 +90,19 @@ def eval_all(expressions, env):
     2
     """
     # BEGIN PROBLEM 6
-    return scheme_eval(expressions.first, env)  # replace this with lines of your own code
+    if expressions == nil:
+        return None
+    res = expressions.map(lambda expr: scheme_eval(expr, env))
+    while res.rest != nil:
+        res = res.rest
+    return res.first
     # END PROBLEM 6
 
 
 ##################
 # Tail Recursion #
 ##################
+
 
 class Unevaluated:
     """An expression and an environment in which it is to be evaluated."""
